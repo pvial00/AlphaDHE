@@ -5,5 +5,5 @@ Uses 1024 bit primes by default.  The alpha.py script allows two parties to deve
 
 # Script usage:
 
-Initiator: python alpha.py init
-Other party: python alpha.py
+Initiator: python alpha.py init  
+Other party: python alpha.py  
