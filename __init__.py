@@ -1,10 +1,12 @@
 import random, os
 from Crypto.Util import number
 from Crypto.Random import random
+from MASHHASH import MASH
 import socket
 
 class AlphaDHE:
-    def __init__(self, socket=None, psize=1024):
+    def __init__(self, keylength=16, socket=None, psize=1024):
+        self.keylength = keylength
         if socket != None:
             self.sock = socket
         self.prime_size = psize
@@ -83,9 +85,9 @@ class AlphaDHE:
     
     def _step1(self, g, p, secret):
         step1 = pow(self.AZtonum(g), self.AZtonum(secret), self.AZtonum(p))
-        return self.numtoAZ(step1)
+        return MASH(self.keylength).digest(self.numtoAZ(step1))
 
     def _step2(self, step1, p, secret):
         key = number.long_to_bytes(pow(self.AZtonum(step1), self.AZtonum(secret), self.AZtonum(p)))
         k = self.bytestoAZ(key)
-        return k
+        return MASH(self.keylength).digest(k)
