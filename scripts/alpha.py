@@ -1,4 +1,4 @@
-from dh import AlphaDHE
+from AlphaDHE import AlphaDHE
 from MASHHASH import MASH
 import sys
 
@@ -6,6 +6,11 @@ try:
     mode = sys.argv[1]
 except IndexError as ier:
    mode = None
+
+try:
+    keylength = int(sys.argv[2])
+except IndexError as ier:
+    keylength = 16
 
 dhe = AlphaDHE()
 g, p, secret = dhe.init()
@@ -22,5 +27,5 @@ sys.stdout.write("Step 1: Send this to your peer\n")
 sys.stdout.write(mystep1+"\n")
 peerstep1 = raw_input("Enter peer's step 1: ")
 key = dhe._step2(peerstep1, p, secret)
-session_key = MASH(length=16).digest(key)
+session_key = MASH(length=keylength).digest(key)
 sys.stdout.write("Secret Session key: "+session_key+"\n")
