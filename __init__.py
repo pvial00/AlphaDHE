@@ -28,7 +28,7 @@ class AlphaDHE:
         return int("".join(num))
 
     def gen_prime(self):
-        return number.getStrongPrime(self.prime_size, randfunc=os.urandom)
+        return number.getStrongPrime(self.prime_size)
 
     def gen(self):
         g = self.gen_prime()
