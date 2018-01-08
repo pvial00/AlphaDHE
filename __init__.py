@@ -1,5 +1,6 @@
 import random, os
 from Crypto.Util import number
+from Crypto.Random import random
 import socket
 
 class AlphaDHE:
@@ -32,7 +33,7 @@ class AlphaDHE:
     def gen(self):
         g = self.gen_prime()
         p = self.gen_prime()
-        secret = self.getRandom(0, (p - 1), os.urandom)
+        secret = random.StrongRandom.randrange(0, (p - 1))
         return g, p, secret
 
     def srv_exchange(self, client):
