@@ -27,12 +27,12 @@ class AlphaDHE:
         return int("".join(num))
 
     def gen_prime(self):
-        return number.getPrime(self.prime_size, os.urandom)
+        return number.getStrongPrime(self.prime_size, randfunc=os.urandom)
 
     def gen(self):
         g = self.gen_prime()
         p = self.gen_prime()
-        secret = self.gen_prime()
+        secret = self.getRandom(0, (p - 1), os.urandom)
         return g, p, secret
 
     def srv_exchange(self, client):
