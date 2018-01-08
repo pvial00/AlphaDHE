@@ -85,7 +85,7 @@ class AlphaDHE:
     
     def _step1(self, g, p, secret):
         step1 = pow(self.AZtonum(g), self.AZtonum(secret), self.AZtonum(p))
-        return MASH(self.keylength).digest(self.numtoAZ(step1))
+        return self.numtoAZ(step1)
 
     def _step2(self, step1, p, secret):
         key = number.long_to_bytes(pow(self.AZtonum(step1), self.AZtonum(secret), self.AZtonum(p)))
