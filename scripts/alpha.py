@@ -23,8 +23,8 @@ else:
     p = raw_input("Enter your peer's p value: ")
 
 mystep1 = dhe._step1(g, p, secret)
-sys.stdout.write("Step 1: Send this to your peer\n")
+sys.stdout.write("Step 1: Send this public key to your peer\n")
 sys.stdout.write(mystep1+"\n")
-peerstep1 = raw_input("Enter peer's step 1: ")
+peerstep1 = raw_input("Enter peer's public key: ")
 session_key = dhe._step2(peerstep1, p, secret)
 sys.stdout.write("Secret Session key: "+session_key+"\n")
