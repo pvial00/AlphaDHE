@@ -91,4 +91,5 @@ class AlphaDHE:
     def _step2(self, step1, p, secret):
         key = number.long_to_bytes(pow(self.AZtonum(step1), self.AZtonum(secret), self.AZtonum(p)))
         k = self.bytestoAZ(key)
-        return MASH(self.keylength).digest(MASH(self.secondary_hash_length).digest(k))
+        h1 = MASH(self.secondary_hash_length).digest(k)
+        return MASH(self.keylength).digest(h1, h1)
