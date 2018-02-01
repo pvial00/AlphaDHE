@@ -1,3 +1,5 @@
+# AlphaDHE v0.3
+
 import random, os
 from Crypto.Util import number
 from Crypto.Random import random
