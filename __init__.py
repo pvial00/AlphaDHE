@@ -1,16 +1,16 @@
 import random, os
 from Crypto.Util import number
 from Crypto.Random import random
-from MASHHASH import MASH
+from pycube import CubeKDF
 import socket
 
 class AlphaDHE:
-    def __init__(self, keylength=16, secondary_hash_length=32, socket=None, psize=1024):
-        self.keylength = keylength
-        self.secondary_hash_length = secondary_hash_length
+    def __init__(self, keylen=16,socket=None, psize=1024, iterations=10):
+        self.keylen = keylen
         if socket != None:
             self.sock = socket
         self.prime_size = psize
+        self.iterations = iterations
 
     def bytestoAZ(self, bts):
         letters = []
@@ -91,4 +91,4 @@ class AlphaDHE:
     def _step2(self, step1, p, secret):
         key = number.long_to_bytes(pow(self.AZtonum(step1), self.AZtonum(secret), self.AZtonum(p)))
         k = self.bytestoAZ(key)
-        return MASH(self.keylength).digest(k, k)
+        return CubeKDF(keysize=self.keylen, iterations=self.iterations).genkey(k)

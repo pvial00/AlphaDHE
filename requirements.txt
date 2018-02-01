@@ -1,2 +1,2 @@
-MASHHASH
 pycrypto
+pycube
