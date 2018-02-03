@@ -1,5 +1,4 @@
 from AlphaDHE import AlphaDHE
-from MASHHASH import MASH
 import sys
 
 try:
@@ -10,7 +9,7 @@ except IndexError as ier:
 try:
     keylength = int(sys.argv[2])
 except IndexError as ier:
-    keylength = 16
+    keylength = 32
 
 dhe = AlphaDHE(keylength)
 g, p, secret = dhe.init()
